@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 
 import prompt.main as Main
 from custom.helper import Helper
-from models.f3_c1_crop import F3C1Crop
+from models.f4_c1_crop import F4C1Crop
 
 """
 Método responsável pela exibição do cabeçalho do módulo
@@ -24,8 +24,8 @@ Método responsável por verificar se existem culturas cadastradas
 """
 def validate_exists_data():
 
-    object_f3c1_crop = F3C1Crop()
-    bool_exists_data = object_f3c1_crop.validate_exists_data()
+    object_f4c1_crop = F4C1Crop()
+    bool_exists_data = object_f4c1_crop.validate_exists_data()
 
     if bool_exists_data == False:
         raise Exception('Não existem culturas cadastradas.')
@@ -212,7 +212,7 @@ def validate_name(dict_data: dict = {}) -> str:
     str_label += f'Informe o nome da cultura: '
     str_return = input(f'{str_label}')
 
-    object_f3c1_crop = F3C1Crop()
+    object_f4c1_crop = F4C1Crop()
 
     while True:
 
@@ -229,7 +229,7 @@ def validate_name(dict_data: dict = {}) -> str:
                 list_params_validate = [
 
                     {'str_column': 'LOWER(CRP_NAME)', 'str_type_where': '=', 'value': str_return.lower().strip()},
-                    F3C1Crop.get_params_to_active_data()
+                    F4C1Crop.get_params_to_active_data()
 
                 ]
 
@@ -237,7 +237,7 @@ def validate_name(dict_data: dict = {}) -> str:
 
                     list_params_validate.append({'str_column': 'CRP_ID', 'str_type_where': '!=', 'value': dict_data['CRP_ID']})
 
-                dict_crop = object_f3c1_crop.set_where(list_params_validate).get_one()
+                dict_crop = object_f4c1_crop.set_where(list_params_validate).get_one()
 
                 if type(dict_crop) == dict:
                     raise Exception(f'Já existe um registro cadastrado com o nome "{str_return.strip()}".')
@@ -321,11 +321,11 @@ def action_list():
 
     show_head_module()
 
-    object_f3c1_crop = F3C1Crop()
+    object_f4c1_crop = F4C1Crop()
 
-    object_f3c1_crop.set_where([F3C1Crop.get_params_to_active_data()])
-    object_f3c1_crop.set_order([{'str_column': 'CRP_ID', 'str_type_order': 'ASC'}])
-    list_data = object_f3c1_crop.get_data().get_list()
+    object_f4c1_crop.set_where([F4C1Crop.get_params_to_active_data()])
+    object_f4c1_crop.set_order([{'str_column': 'CRP_ID', 'str_type_order': 'ASC'}])
+    list_data = object_f4c1_crop.get_data().get_list()
 
     for dict_data in list_data:
 
@@ -339,21 +339,21 @@ Método responsável por executar a ação de retorno de dados de uma determinad
 """
 def get_data_by_id(int_crp_id: int = 0) -> dict:
 
-    object_f3c1_crop = F3C1Crop()
+    object_f4c1_crop = F4C1Crop()
 
-    object_f3c1_crop.set_where([
+    object_f4c1_crop.set_where([
 
         {'str_column': 'CRP_ID', 'str_type_where': '=', 'value': int_crp_id},
-        F3C1Crop.get_params_to_active_data()
+        F4C1Crop.get_params_to_active_data()
 
     ])
 
-    dict_data = object_f3c1_crop.get_data().get_one()
+    dict_data = object_f4c1_crop.get_data().get_one()
 
     if type(dict_data) == type(None):
         raise Exception(f'Nenhum registro foi localizado com o ID {int_crp_id}.')
 
-    return object_f3c1_crop
+    return object_f4c1_crop
 
 
 # ... Demais parâmetros...
@@ -387,14 +387,14 @@ def action_insert():
 
     dict_data['CRP_NAME'] = str_crp_name
 
-    object_f3c1_crop = F3C1Crop()
-    object_f3c1_crop.insert(dict_data)
+    object_f4c1_crop = F4C1Crop()
+    object_f4c1_crop.insert(dict_data)
 
-    int_crp_id = object_f3c1_crop.get_last_id()
+    int_crp_id = object_f4c1_crop.get_last_id()
 
     # Retorno de dados após o cadastro
-    object_f3c1_crop = get_data_by_id(int_crp_id)
-    dict_data = object_f3c1_crop.get_one()
+    object_f4c1_crop = get_data_by_id(int_crp_id)
+    dict_data = object_f4c1_crop.get_one()
 
     print(format_data_view(dict_data = dict_data, bool_show_id = False, bool_show_insert_date = False, bool_show_update_date = False))
 
@@ -426,8 +426,8 @@ def action_update():
 
     show_head_module()
 
-    object_f3c1_crop = get_data_by_id(int_crp_id)
-    dict_data = object_f3c1_crop.get_one()
+    object_f4c1_crop = get_data_by_id(int_crp_id)
+    dict_data = object_f4c1_crop.get_one()
 
     print('Os dados abaixo representam o cadastro atual do registro informado.')
     print('')
@@ -462,11 +462,11 @@ def action_update():
     if str_crp_name.strip() != '':
         dict_data['CRP_NAME'] = str_crp_name
 
-    object_f3c1_crop.update(dict_data)
+    object_f4c1_crop.update(dict_data)
 
     # Retorno de dados após as atualizações
-    object_f3c1_crop = get_data_by_id(int_crp_id)
-    dict_data = object_f3c1_crop.get_one()
+    object_f4c1_crop = get_data_by_id(int_crp_id)
+    dict_data = object_f4c1_crop.get_one()
 
     print(format_data_view(dict_data = dict_data, bool_show_update_date = False))
 
@@ -498,12 +498,12 @@ def action_delete():
 
     show_head_module()
 
-    object_f3c1_crop = get_data_by_id(int_crp_id)
-    dict_data = object_f3c1_crop.get_one()
+    object_f4c1_crop = get_data_by_id(int_crp_id)
+    dict_data = object_f4c1_crop.get_one()
 
-    dict_data['CRP_STATUS'] = F3C1Crop.STATUS_DELETED
+    dict_data['CRP_STATUS'] = F4C1Crop.STATUS_DELETED
 
-    object_f3c1_crop.update(dict_data)
+    object_f4c1_crop.update(dict_data)
 
     print('Registro excluído com sucesso.')
 

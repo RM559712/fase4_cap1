@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 
 import prompt.main as Main
 from custom.helper import Helper
-from models.f3_c1_sensor import F3C1Sensor
+from models.f4_c1_sensor import F4C1Sensor
 
 """
 Método responsável pela exibição do cabeçalho do módulo
@@ -23,8 +23,8 @@ Método responsável por verificar se existem sensores cadastrados
 """
 def validate_exists_data():
 
-    object_f3c1_sensor = F3C1Sensor()
-    bool_exists_data = object_f3c1_sensor.validate_exists_data()
+    object_f4c1_sensor = F4C1Sensor()
+    bool_exists_data = object_f4c1_sensor.validate_exists_data()
 
     if bool_exists_data == False:
         raise Exception('Não existem sensores cadastrados.')
@@ -211,7 +211,7 @@ def validate_name(dict_data: dict = {}) -> str:
     str_label += f'Informe o nome do sensor: '
     str_return = input(f'{str_label}')
 
-    object_f3c1_sensor = F3C1Sensor()
+    object_f4c1_sensor = F4C1Sensor()
 
     while True:
 
@@ -228,7 +228,7 @@ def validate_name(dict_data: dict = {}) -> str:
                 list_params_validate = [
 
                     {'str_column': 'LOWER(SNS_NAME)', 'str_type_where': '=', 'value': str_return.lower().strip()},
-                    F3C1Sensor.get_params_to_active_data()
+                    F4C1Sensor.get_params_to_active_data()
 
                 ]
 
@@ -236,7 +236,7 @@ def validate_name(dict_data: dict = {}) -> str:
 
                     list_params_validate.append({'str_column': 'SNS_ID', 'str_type_where': '!=', 'value': dict_data['SNS_ID']})
 
-                dict_sensor = object_f3c1_sensor.set_where(list_params_validate).get_one()
+                dict_sensor = object_f4c1_sensor.set_where(list_params_validate).get_one()
 
                 if type(dict_sensor) == dict:
                     raise Exception(f'Já existe um registro cadastrado com o nome "{str_return.strip()}".')
@@ -283,7 +283,7 @@ def validate_serie_code(dict_data: dict = {}) -> str:
     str_label += f'Informe o código de série do sensor: '
     str_return = input(f'{str_label}')
 
-    object_f3c1_sensor = F3C1Sensor()
+    object_f4c1_sensor = F4C1Sensor()
 
     while True:
 
@@ -300,7 +300,7 @@ def validate_serie_code(dict_data: dict = {}) -> str:
                 list_params_validate = [
 
                     {'str_column': 'SNS_SERIE_CODE', 'str_type_where': '=', 'value': str_return.lower().strip()},
-                    F3C1Sensor.get_params_to_active_data()
+                    F4C1Sensor.get_params_to_active_data()
 
                 ]
 
@@ -308,7 +308,7 @@ def validate_serie_code(dict_data: dict = {}) -> str:
 
                     list_params_validate.append({'str_column': 'SNS_ID', 'str_type_where': '!=', 'value': dict_data['SNS_ID']})
 
-                dict_sensor = object_f3c1_sensor.set_where(list_params_validate).get_one()
+                dict_sensor = object_f4c1_sensor.set_where(list_params_validate).get_one()
 
                 if type(dict_sensor) == dict:
                     raise Exception(f'Já existe um registro cadastrado com o código de série "{str_return.strip()}".')
@@ -334,7 +334,7 @@ Return: str
 def format_data_view_type(dict_data: dict = {}) -> str:
 
     str_return = 'Tipo de sensor: '
-    str_return += f'{F3C1Sensor.get_type_options(dict_data['SNS_TYPE'])['title']}' if 'SNS_TYPE' in dict_data and type(dict_data['SNS_TYPE']) != None and Helper.is_int(dict_data['SNS_TYPE']) == True else 'N/I'
+    str_return += f'{F4C1Sensor.get_type_options(dict_data['SNS_TYPE'])['title']}' if 'SNS_TYPE' in dict_data and type(dict_data['SNS_TYPE']) != None and Helper.is_int(dict_data['SNS_TYPE']) == True else 'N/I'
 
     return str_return
 
@@ -354,7 +354,7 @@ def validate_type(dict_data: dict = {}) -> int:
     str_label = f'Importante: Caso deseje manter o tipo de sensor atual ( abaixo ), basta ignorar o preenchimento.\n{format_data_view_type(dict_data)}\n' if bool_is_update == True else ''
 
     str_label += f'Os tipos de sensores são: '
-    list_type_options = F3C1Sensor.get_type_options()
+    list_type_options = F4C1Sensor.get_type_options()
     for list_type_option in list_type_options:
         str_label += f'{list_type_option['title']} [{list_type_option['code']}]; '
 
@@ -373,7 +373,7 @@ def validate_type(dict_data: dict = {}) -> int:
 
             if int_return.strip() != '':
 
-                if int(int_return) not in F3C1Sensor.get_type_options_codes(): 
+                if int(int_return) not in F4C1Sensor.get_type_options_codes(): 
                     raise Exception('A opção informada deve representar um dos tipos disponíveis.')
 
             break
@@ -457,11 +457,11 @@ def action_list():
 
     show_head_module()
 
-    object_f3c1_sensor = F3C1Sensor()
+    object_f4c1_sensor = F4C1Sensor()
 
-    object_f3c1_sensor.set_where([F3C1Sensor.get_params_to_active_data()])
-    object_f3c1_sensor.set_order([{'str_column': 'SNS_ID', 'str_type_order': 'ASC'}])
-    list_data = object_f3c1_sensor.get_data().get_list()
+    object_f4c1_sensor.set_where([F4C1Sensor.get_params_to_active_data()])
+    object_f4c1_sensor.set_order([{'str_column': 'SNS_ID', 'str_type_order': 'ASC'}])
+    list_data = object_f4c1_sensor.get_data().get_list()
 
     for dict_data in list_data:
 
@@ -475,21 +475,21 @@ Método responsável por executar a ação de retorno de dados de um determinado
 """
 def get_data_by_id(int_sns_id: int = 0) -> dict:
 
-    object_f3c1_sensor = F3C1Sensor()
+    object_f4c1_sensor = F4C1Sensor()
 
-    object_f3c1_sensor.set_where([
+    object_f4c1_sensor.set_where([
 
         {'str_column': 'SNS_ID', 'str_type_where': '=', 'value': int_sns_id},
-        F3C1Sensor.get_params_to_active_data()
+        F4C1Sensor.get_params_to_active_data()
 
     ])
 
-    dict_data = object_f3c1_sensor.get_data().get_one()
+    dict_data = object_f4c1_sensor.get_data().get_one()
 
     if type(dict_data) == type(None):
         raise Exception(f'Nenhum registro foi localizado com o ID {int_sns_id}.')
 
-    return object_f3c1_sensor
+    return object_f4c1_sensor
 
 
 # ... Demais parâmetros...
@@ -533,14 +533,14 @@ def action_insert():
     dict_data['SNS_SERIE_CODE'] = str_sns_serie_code
     dict_data['SNS_TYPE'] = int_sns_type
 
-    object_f3c1_sensor = F3C1Sensor()
-    object_f3c1_sensor.insert(dict_data)
+    object_f4c1_sensor = F4C1Sensor()
+    object_f4c1_sensor.insert(dict_data)
 
-    int_sns_id = object_f3c1_sensor.get_last_id()
+    int_sns_id = object_f4c1_sensor.get_last_id()
 
     # Retorno de dados após o cadastro
-    object_f3c1_sensor = get_data_by_id(int_sns_id)
-    dict_data = object_f3c1_sensor.get_one()
+    object_f4c1_sensor = get_data_by_id(int_sns_id)
+    dict_data = object_f4c1_sensor.get_one()
 
     print(format_data_view(dict_data = dict_data, bool_show_id = False, bool_show_insert_date = False, bool_show_update_date = False))
 
@@ -572,8 +572,8 @@ def action_update():
 
     show_head_module()
 
-    object_f3c1_sensor = get_data_by_id(int_sns_id)
-    dict_data = object_f3c1_sensor.get_one()
+    object_f4c1_sensor = get_data_by_id(int_sns_id)
+    dict_data = object_f4c1_sensor.get_one()
 
     print('Os dados abaixo representam o cadastro atual do registro informado.')
     print('')
@@ -622,11 +622,11 @@ def action_update():
     if str_sns_type > 0:
         dict_data['SNS_TYPE'] = str_sns_type
 
-    object_f3c1_sensor.update(dict_data)
+    object_f4c1_sensor.update(dict_data)
 
     # Retorno de dados após as atualizações
-    object_f3c1_sensor = get_data_by_id(int_sns_id)
-    dict_data = object_f3c1_sensor.get_one()
+    object_f4c1_sensor = get_data_by_id(int_sns_id)
+    dict_data = object_f4c1_sensor.get_one()
 
     print(format_data_view(dict_data = dict_data, bool_show_update_date = False))
 
@@ -658,12 +658,12 @@ def action_delete():
 
     show_head_module()
 
-    object_f3c1_sensor = get_data_by_id(int_sns_id)
-    dict_data = object_f3c1_sensor.get_one()
+    object_f4c1_sensor = get_data_by_id(int_sns_id)
+    dict_data = object_f4c1_sensor.get_one()
 
-    dict_data['SNS_STATUS'] = F3C1Sensor.STATUS_DELETED
+    dict_data['SNS_STATUS'] = F4C1Sensor.STATUS_DELETED
 
-    object_f3c1_sensor.update(dict_data)
+    object_f4c1_sensor.update(dict_data)
 
     print('Registro excluído com sucesso.')
 

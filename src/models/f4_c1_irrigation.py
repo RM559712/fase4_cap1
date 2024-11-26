@@ -1,7 +1,7 @@
 from models.database.database import Database
 from custom.helper import Helper
 
-class F3C1Irrigation(Database):
+class F4C1Irrigation(Database):
 
     # Constantes referentes à origem da execução
     ORIGIN_MANUAL = 1
@@ -62,13 +62,13 @@ class F3C1Irrigation(Database):
         try:
 
             self.set_select(['IRG.*', 'PLN.PLN_NAME', 'CRP.CRP_NAME'])
-            self.set_table('F3_C1_IRRIGATION IRG')
+            self.set_table('F4_C1_IRRIGATION IRG')
             self.set_join([
-                {'str_type_join': 'INNER JOIN', 'str_table': 'F3_C1_PLANTATION PLN', 'str_where': 'PLN.PLN_ID = IRG.IRG_PLN_ID'},
-                {'str_type_join': 'INNER JOIN', 'str_table': 'F3_C1_CROP CRP', 'str_where': 'CRP.CRP_ID = PLN.PLN_CRP_ID'}
+                {'str_type_join': 'INNER JOIN', 'str_table': 'F4_C1_PLANTATION PLN', 'str_where': 'PLN.PLN_ID = IRG.IRG_PLN_ID'},
+                {'str_type_join': 'INNER JOIN', 'str_table': 'F4_C1_CROP CRP', 'str_where': 'CRP.CRP_ID = PLN.PLN_CRP_ID'}
             ])
             self.set_where([
-                F3C1Irrigation.get_params_to_active_data(),
+                F4C1Irrigation.get_params_to_active_data(),
                 {'str_column': 'PLN.PLN_ID', 'str_type_where': '=', 'value': pln_id},
                 {'str_column': 'IRG.IRG_STATUS_EXECUTION', 'str_type_where': '=', 'value': self.STATUS_EXECUTION_RUNNING}
             ])

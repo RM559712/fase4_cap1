@@ -1,7 +1,7 @@
 from models.database.database import Database
 from custom.helper import Helper
 
-class F3C1Sensor(Database):
+class F4C1Sensor(Database):
 
     # Constantes referentes aos tipos de sensores
     TYPE_TEMPERATURE = 1
@@ -40,22 +40,22 @@ class F3C1Sensor(Database):
 
         dict_types = [
             {
-                'code': F3C1Sensor.TYPE_TEMPERATURE,
+                'code': F4C1Sensor.TYPE_TEMPERATURE,
                 'title': 'Sensor de Temperatura do solo'
             },{
-                'code': F3C1Sensor.TYPE_HUMIDITY,
+                'code': F4C1Sensor.TYPE_HUMIDITY,
                 'title': 'Sensor de Umidade do solo'
             },{
-                'code': F3C1Sensor.TYPE_LIGHT,
+                'code': F4C1Sensor.TYPE_LIGHT,
                 'title': 'Sensor de luminosidade'
             },{
-                'code': F3C1Sensor.TYPE_RADIATION,
+                'code': F4C1Sensor.TYPE_RADIATION,
                 'title': 'Sensor de radiação'
             },{
-                'code': F3C1Sensor.TYPE_SALINITY,
+                'code': F4C1Sensor.TYPE_SALINITY,
                 'title': 'Sensor de salinidade do solo'
             },{
-                'code': F3C1Sensor.TYPE_PH,
+                'code': F4C1Sensor.TYPE_PH,
                 'title': 'Sensor de pH do solo'
             }
         ]
@@ -75,7 +75,7 @@ class F3C1Sensor(Database):
 
         list_return = []
 
-        list_type_options = F3C1Sensor.get_type_options()
+        list_type_options = F4C1Sensor.get_type_options()
 
         for dict_type_option in list_type_options:
             list_return.append(dict_type_option['code'])

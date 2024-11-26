@@ -2,7 +2,7 @@ from datetime import datetime
 import pprint
 from custom.helper import Helper
 from custom.openweather import OpenWeather
-from models.f3_c1_sensor import F3C1Sensor
+from models.f4_c1_sensor import F4C1Sensor
 
 class Irrigation:
 
@@ -50,11 +50,11 @@ class Irrigation:
 
                 try:
 
-                    dict_sensor = F3C1Sensor.get_type_options(int_sensor_type)
+                    dict_sensor = F4C1Sensor.get_type_options(int_sensor_type)
 
                     match int_sensor_type:
 
-                        case F3C1Sensor.TYPE_TEMPERATURE:
+                        case F4C1Sensor.TYPE_TEMPERATURE:
 
                             float_temp_max = dict_filters_plantation.get('float_temp_max', None)
 
@@ -64,7 +64,7 @@ class Irrigation:
                             if float_value < float_temp_max:
                                 self.exception(f'De acordo com a medição informada ( {float_value}°C ), não será necessário iniciar a irrigação pois a temperatura está abaixo do limite máximo ( {float_temp_max}°C ).')
 
-                        case F3C1Sensor.TYPE_HUMIDITY:
+                        case F4C1Sensor.TYPE_HUMIDITY:
 
                             float_humidity_min = dict_filters_plantation.get('float_humidity_min', None)
 
@@ -74,7 +74,7 @@ class Irrigation:
                             if float_value > float_humidity_min:
                                 self.exception(f'De acordo com a medição informada ( {float_value}% ), não será necessário iniciar a irrigação pois a umidade está acima do limite mínimo ( {float_humidity_min}% ).')
 
-                        case F3C1Sensor.TYPE_LIGHT:
+                        case F4C1Sensor.TYPE_LIGHT:
 
                             float_light_max = dict_filters_plantation.get('float_light_max', None)
 
@@ -84,7 +84,7 @@ class Irrigation:
                             if float_value < float_light_max:
                                 self.exception(f'De acordo com a medição informada ( {float_value} lux ), não será necessário iniciar a irrigação pois a luminosidade está abaixo do limite máximo ( {float_light_max} lux ).')
 
-                        case F3C1Sensor.TYPE_RADIATION:
+                        case F4C1Sensor.TYPE_RADIATION:
                            
                            float_radiation_max = dict_filters_plantation.get('float_radiation_max', None)
 

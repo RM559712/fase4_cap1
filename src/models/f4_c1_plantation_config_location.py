@@ -1,7 +1,7 @@
 from models.database.database import Database
 from custom.helper import Helper
 
-class F3C1PlantationConfigLocation(Database):
+class F4C1PlantationConfigLocation(Database):
 
     def __init__(self, object_database = None):
 

@@ -1,21 +1,21 @@
 from models.database.database import Database
 from custom.helper import Helper
 
-class F3C1Measurement(Database):
+class F4C1Plantation(Database):
 
     def __init__(self, object_database = None):
 
         super().__init__(object_database)
 
         self.table_name = Helper.convert_camel_to_snake_case(self.__class__.__name__)
-        self.primary_key_column = 'MSM_ID'
+        self.primary_key_column = 'PLN_ID'
 
 
     @staticmethod
     def get_params_to_active_data() -> dict:
 
         # Regras: Os registros são excluídos de forma lógica
-        return {'str_column': 'MSM_STATUS', 'str_type_where': '=', 'value': Database.STATUS_ACTIVE}
+        return {'str_column': 'PLN_STATUS', 'str_type_where': '=', 'value': Database.STATUS_ACTIVE}
 
 
     def validate_exists_data(self) -> bool:
