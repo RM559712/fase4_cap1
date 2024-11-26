@@ -995,7 +995,7 @@ def validate_latitude(dict_data: dict = {}) -> float:
 
     bool_is_update = ('PLN_ID' in dict_data and type(dict_data['PLN_ID']) == int)
 
-    str_label = f'Importante: Caso deseje manter a latitude atual ( abaixo ), basta ignorar o preenchimento.\n{format_data_view_latitude(dict_data)}\n' if bool_is_update == True else ''
+    str_label = f'Importante: Caso deseje manter a latitude atual ( abaixo ), basta ignorar o preenchimento. Caso queira apagar o valor, digite "none".\n{format_data_view_latitude(dict_data)}\n' if bool_is_update == True else ''
     str_label += f'Informe a latitude da plantação em formato numérico ( ex.: 123, 123.45 ou 123,45 ): '
     float_return = input(f'{str_label}')
 
@@ -1053,7 +1053,7 @@ def validate_longitude(dict_data: dict = {}) -> float:
 
     bool_is_update = ('PLN_ID' in dict_data and type(dict_data['PLN_ID']) == int)
 
-    str_label = f'Importante: Caso deseje manter a longitude atual ( abaixo ), basta ignorar o preenchimento.\n{format_data_view_longitude(dict_data)}\n' if bool_is_update == True else ''
+    str_label = f'Importante: Caso deseje manter a longitude atual ( abaixo ), basta ignorar o preenchimento. Caso queira apagar o valor, digite "none".\n{format_data_view_longitude(dict_data)}\n' if bool_is_update == True else ''
     str_label += f'Informe a longitude da plantação em formato numérico ( ex.: 123, 123.45 ou 123,45 ): '
     float_return = input(f'{str_label}')
 
@@ -1111,7 +1111,7 @@ def validate_next_hours_validate_rain(dict_data: dict = {}) -> int:
 
     bool_is_update = ('PLN_ID' in dict_data and type(dict_data['PLN_ID']) == int)
 
-    str_label = f'Importante: Caso deseje manter a quantidade de horas para verificação de chuva atual ( abaixo ), basta ignorar o preenchimento.\n{format_data_view_next_hours_validate_rain(dict_data)}\n' if bool_is_update == True else ''
+    str_label = f'Importante: Caso deseje manter a quantidade de horas para verificação de chuva atual ( abaixo ), basta ignorar o preenchimento. Caso queira apagar o valor, digite "none".\n{format_data_view_next_hours_validate_rain(dict_data)}\n' if bool_is_update == True else ''
     str_label += f'Informe a quantidade de horas para verificação de chuva em formato numérico ( ex.: 123 ): '
     int_return = input(f'{str_label}')
 
@@ -1166,7 +1166,7 @@ def validate_max_average_rain_volume(dict_data: dict = {}) -> float:
 
     bool_is_update = ('PLN_ID' in dict_data and type(dict_data['PLN_ID']) == int)
 
-    str_label = f'Importante: Caso deseje manter a quantidade média máxima de chuva atual ( abaixo ), basta ignorar o preenchimento.\n{format_data_view_max_average_rain_volume(dict_data)}\n' if bool_is_update == True else ''
+    str_label = f'Importante: Caso deseje manter a quantidade média máxima de chuva atual ( abaixo ), basta ignorar o preenchimento. Caso queira apagar o valor, digite "none".\n{format_data_view_max_average_rain_volume(dict_data)}\n' if bool_is_update == True else ''
     str_label += f'Informe a quantidade média máxima de chuva da plantação em formato numérico ( ex.: 123, 123.45 ou 123,45 ): '
     float_return = input(f'{str_label}')
 
@@ -1579,10 +1579,18 @@ def action_insert():
     dict_data_config_location = {}
 
     dict_data_config_location['PCL_PLN_ID'] = int_pln_id
-    dict_data_config_location['PCL_LATITUDE'] = float_pcl_latitude
-    dict_data_config_location['PCL_LONGITUDE'] = float_pcl_longitude
-    dict_data_config_location['PCL_NEXT_HOURS_VALIDATE_RAIN'] = int_pcl_next_hours_validate_rain
-    dict_data_config_location['PCL_MAX_AVERAGE_RAIN_VOLUME'] = float_pcl_max_average_rain_volume
+
+    if type(float_pcl_latitude) != type(None):
+        dict_data_config_location['PCL_LATITUDE'] = float_pcl_latitude
+
+    if type(float_pcl_longitude) != type(None):
+        dict_data_config_location['PCL_LONGITUDE'] = float_pcl_longitude
+
+    if type(int_pcl_next_hours_validate_rain) != type(None):
+        dict_data_config_location['PCL_NEXT_HOURS_VALIDATE_RAIN'] = int_pcl_next_hours_validate_rain
+
+    if type(float_pcl_max_average_rain_volume) != type(None):
+        dict_data_config_location['PCL_MAX_AVERAGE_RAIN_VOLUME'] = float_pcl_max_average_rain_volume
 
     object_f4c1_plantation_config_location = F4C1PlantationConfigLocation()
     object_f4c1_plantation_config_location.insert(dict_data_config_location)
