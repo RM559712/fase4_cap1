@@ -121,7 +121,7 @@ def get_system_menu_options() -> list:
             'action': ModuleMeasurement.action_main
         },{
             'code': 6,
-            'title': 'Relatórios',
+            'title': 'Gráficos',
             'action': ModuleReport.action_main
         },{
             'code': 7,
@@ -251,7 +251,7 @@ import prompt.modules.irrigation as ModuleIrrigation
 import prompt.modules.measurement as ModuleMeasurement
 
 # ---------------------------------------------------------------------------------------------------------------
-# Métodos referentes a opção "Relatórios"
+# Métodos referentes a opção "Gráficos"
 # ---------------------------------------------------------------------------------------------------------------
 
 import prompt.modules.report as ModuleReport

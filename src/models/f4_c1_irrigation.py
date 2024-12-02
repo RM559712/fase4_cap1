@@ -86,6 +86,34 @@ class F4C1Irrigation(Database):
         return dict_return
 
 
+    def get_finished_execution_by_plantation(self, pln_id: int = 0) -> dict:
+
+        dict_return = {'status': True, 'list_data': []}
+
+        try:
+
+            self.set_select(['IRG.*', 'PLN.PLN_NAME', 'CRP.CRP_NAME'])
+            self.set_table('F4_C1_IRRIGATION IRG')
+            self.set_join([
+                {'str_type_join': 'INNER JOIN', 'str_table': 'F4_C1_PLANTATION PLN', 'str_where': 'PLN.PLN_ID = IRG.IRG_PLN_ID'},
+                {'str_type_join': 'INNER JOIN', 'str_table': 'F4_C1_CROP CRP', 'str_where': 'CRP.CRP_ID = PLN.PLN_CRP_ID'}
+            ])
+            self.set_where([
+                F4C1Irrigation.get_params_to_active_data(),
+                {'str_column': 'PLN.PLN_ID', 'str_type_where': '=', 'value': pln_id},
+                {'str_column': 'IRG.IRG_STATUS_EXECUTION', 'str_type_where': '=', 'value': self.STATUS_EXECUTION_FINISHED}
+            ])
+            list_data = self.get_data().get_list()
+
+            dict_return['list_data'] = list_data
+
+        except Exception as error:
+
+            dict_return = {'status': False, 'message': error}
+
+        return dict_return
+
+
     def validate_exists_active_execution_by_plantation(self, pln_id: int = 0) -> bool:
 
         dict_active_irrigation = self.get_active_execution_by_plantation(pln_id)
