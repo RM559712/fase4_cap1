@@ -3,8 +3,8 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-int ledPin = 23;
-int buttonPin = 17;
+int8_t ledPin = 23;
+int8_t buttonPin = 17;
 
 void search12C() {
   Serial.println("Escaneando endereços I2C...");
@@ -17,7 +17,7 @@ void search12C() {
   }
 }
 
-float executeMeasurement(int minValue, int maxValue) {
+float executeMeasurement(int8_t minValue, int8_t maxValue) {
   return minValue + (rand() % (maxValue - minValue + 1)) + (rand() % 100) / 100.0;
 }
 
@@ -36,9 +36,9 @@ void setup() {
 }
 
 void loop() {
-  int buttonState = digitalRead(buttonPin);
+  int8_t buttonState = digitalRead(buttonPin);
 
-  if (buttonState == HIGH)
+  if (buttonState == HIGH) 
     digitalWrite(ledPin, LOW);
 
   else {
@@ -49,20 +49,18 @@ void loop() {
     delay(500);
 
     // > Regras: Está sendo utilizando um método para geração aleatória para simular um ambiente real
-    float float_light = executeMeasurement(0, 999999);
+    int8_t int_ph = executeMeasurement(0, 14.00);
 
-    Serial.print("Luminosidade: ");
-    Serial.print(float_light);
-    Serial.print(" lux");
-    Serial.println("\r\n");
+    Serial.print("pH: ");
+    Serial.print(int_ph);
+    Serial.println("");
 
     lcd.setCursor(0, 0);
     lcd.clear();
-    lcd.print(float_light);
-    lcd.print(" lux");
+    lcd.print(int_ph);
   }
 
-  int sensorValue = analogRead(A0);
-  Serial.println(sensorValue);
+  int8_t sensorValue = analogRead(A0);
+  Serial.println(sensorValue); 
   delay(1000);
 }

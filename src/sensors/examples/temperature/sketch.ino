@@ -3,8 +3,8 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-int ledPin = 23;
-int buttonPin = 17;
+int8_t ledPin = 23;
+int8_t buttonPin = 17;
 
 void search12C() {
   Serial.println("Escaneando endereços I2C...");
@@ -17,7 +17,7 @@ void search12C() {
   }
 }
 
-float executeMeasurement(int minValue, int maxValue) {
+float executeMeasurement(int8_t minValue, int8_t maxValue) {
   return minValue + (rand() % (maxValue - minValue + 1)) + (rand() % 100) / 100.0;
 }
 
@@ -36,7 +36,7 @@ void setup() {
 }
 
 void loop() {
-  int buttonState = digitalRead(buttonPin);
+  int8_t buttonState = digitalRead(buttonPin);
 
   if (buttonState == HIGH)
     digitalWrite(ledPin, LOW);
@@ -62,7 +62,7 @@ void loop() {
     lcd.print("C");
   }
 
-  int sensorValue = analogRead(A0);
+  int8_t sensorValue = analogRead(A0);
   Serial.println(sensorValue); 
   delay(1000);
 }
