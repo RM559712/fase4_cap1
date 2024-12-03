@@ -69,17 +69,20 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
     - Arquivo "params.json": Configurações do sistema em geral.
 
 3. <b>document</b>: Diretório para armazenamento de documentos relacionados ao sistema.
-    - Diretório "sensors": Diretório para armazenamento dos conteúdos relacionados aos sensores do sistema conforme exemplificado na plataforma Wokwi.
 
 4. <b>scripts</b>: Diretório para armazenamento de scripts.
     - Diretório "oracle": Diretório para armazenamento de scripts do banco de dados Oracle.
 
 5. <b>src</b>: Diretório para armazenamento de código fonte do sistema em Python.
-    - Diretório "custom": Diretório para armazenamento <i>classes/componentes</i> auxiliares do sistema.
-    - Diretório "models": Diretório para armazenamento <i>classes/componentes</i> relacionados ao banco de dados.
-    - Diretório "prompt": Diretório para armazenamento arquivos de inicialização do sistema em formato <i>prompt</i>.
+    - Diretório "custom": Diretório para armazenamento de <i>classes/componentes</i> auxiliares do sistema.
+    - Diretório "models": Diretório para armazenamento de <i>classes/componentes</i> relacionados ao banco de dados.
+    - Diretório "prompt": Diretório para armazenamento de arquivos de inicialização do sistema em formato <i>prompt</i>.
+	- Diretório "sensors": Diretório para armazenamento de código fonte dos sensores utilizados no sistema.
 
-6. <b>README.md</b>: Documentação do sistema em formato markdown.
+6. <b>testes</b>: Diretório para armazenamento de resultados de testes.
+	- Diretório "images": Diretório para armazenamento de imagens relacionadas aos testes efetuados.
+
+7. <b>README.md</b>: Documentação do sistema em formato markdown.
 
 ## 🔧 Como executar o código
 
