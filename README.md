@@ -55,7 +55,7 @@ Algumas informações sobre os módulos dessa versão:
     - <strong>Sensor de pH (<i>simulação - cap. 3</i>)</strong>: Exemplo desenvolvido conforme solicitado em https://on.fiap.com.br/mod/assign/view.php?id=439230&c=11933. Pode ser visualizado e testado no seguinte endereço da plataforma Wokwi <PENDENTE - URL>. O código otimizado está disponível em [código](https://github.com/RM559712/fase4_cap1/tree/main/src/sensors/simulation/ph) (<i>1.1.0</i>). Exemplos de utilização do <i>Serial Plotter</i> estão disponíveis em [exemplos](https://github.com/RM559712/fase4_cap1/tree/main/tests/images/sensors/simulation/ph/serial_plotter) (<i>1.1.0</i>);
     - <strong>Sensor de Umidade (<i>simulação - cap. 3</i>)</strong>: Exemplo desenvolvido conforme solicitado em https://on.fiap.com.br/mod/assign/view.php?id=439230&c=11933. Pode ser visualizado e testado no seguinte endereço da plataforma Wokwi <PENDENTE - URL>. O código otimizado está disponível em [código](https://github.com/RM559712/fase4_cap1/tree/main/src/sensors/simulation/humidity) (<i>1.1.0</i>). Exemplos de utilização do <i>Serial Plotter</i> estão disponíveis em [exemplos](https://github.com/RM559712/fase4_cap1/tree/main/tests/images/sensors/simulation/humidity/serial_plotter) (<i>1.1.0</i>);
 - <strong>Módulo "Gráficos"</strong>: Permite a visualização de gráficos do sistema (<i>1.1.0</i>);
-    - <strong>Visualizar gráfico de irrigação</strong>: Permite a visualização do gráfico de dispersão referente às irrigações já finalizadas por plantação. Exemplos de visualização do gráfico estão disponíveis em [exemplos](https://github.com/RM559712/fase4_cap1/tree/main/tests/images/modules/report);
+    - <strong>Visualizar gráfico de irrigação</strong>: Permite a visualização do gráfico de dispersão referente às irrigações já finalizadas por plantação. Exemplos de visualização do gráfico estão disponíveis em [exemplos](https://github.com/RM559712/fase4_cap1/tree/main/tests/images/modules/report). Esse módulo possui a opção para visualização <i>web</i> utilizando Streamlit;
 
 ## 📁 Estrutura de pastas
 
@@ -78,6 +78,7 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
     - Diretório "models": Diretório para armazenamento de <i>classes/componentes</i> relacionados ao banco de dados.
     - Diretório "prompt": Diretório para armazenamento de arquivos de inicialização do sistema em formato <i>prompt</i>.
 	- Diretório "sensors": Diretório para armazenamento de código fonte dos sensores utilizados no sistema.
+    - Diretório "web": Diretório para armazenamento de arquivos de inicialização do sistema em formato <i>web</i>.
 
 6. <b>tests</b>: Diretório para armazenamento de resultados de testes.
 	- Diretório "images": Diretório para armazenamento de imagens relacionadas aos testes efetuados.
@@ -90,6 +91,11 @@ Como se trata de uma versão em formato <i>prompt</i>, para execução das funci
 
 1. Utilizando algum editor de código compatível com a linguagem de programação Python (<i>VsCode, PyCharm, etc.</i>), acesse o diretório "./src/prompt".
 2. Neste diretório, basta abrir o arquivo "main.py" e executá-lo.
+
+Alguns módulos do sistema podem ser executados em formato <i>web</i> utilizando Streamlit conforme descritos em [Descrição](https://github.com/RM559712/fase4_cap1?tab=readme-ov-file#-descri%C3%A7%C3%A3o). Para acessá-los, os seguintes passos devem ser seguidos:
+
+1. Utilizando algum editor de código compatível com a linguagem de programação Python (<i>VsCode, PyCharm, etc.</i>), acesse o diretório "./src/web/modules/{nome_do_modulo}".
+2. Neste diretório, basta identificar o arquivo desejado e executar o comando `streamlit run {nome_do_arquivo}.py`.
 
 Para essa versão não são solicitados parâmetros para acesso como por exemplo <i>username</i>, <i>password</i>, <i>token access</i>, etc.
 
