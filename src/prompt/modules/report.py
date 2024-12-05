@@ -9,10 +9,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 
 import pandas as Pandas
 import matplotlib.pyplot as Pyplot
+import numpy as Numpy
 import seaborn as Seaborn
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error, r2_score
 
 import prompt.main as Main
 import prompt.modules.plantation as ModulePlantation
@@ -171,13 +172,19 @@ def action_graphic_irrigation():
     x = object_dataframe[['IRG_HOUR_INI', 'IRG_WEEK_DAY', 'IRG_DURATION', 'IRG_ORIGIN']]
     y = object_dataframe['IRG_WATER_LITER']
 
-    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 42)
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 42)
 
     object_random_forest_regressor = RandomForestRegressor()
     object_random_forest_regressor.fit(X_train, y_train)
 
     y_pred = object_random_forest_regressor.predict(X_test)
-    mse = mean_squared_error(y_test, y_pred)
+    float_accuracy = object_random_forest_regressor.score(X_test, y_test)
+
+    float_mse = mean_squared_error(y_test, y_pred)
+    float_rmse = Numpy.sqrt(float_mse)
+    float_mae = mean_absolute_error(y_test, y_pred)
+    float_mape = mean_absolute_percentage_error(y_test, y_pred)
+    float_r2 = r2_score(y_test, y_pred)
 
     # Gráfico de dispersão
     Pyplot.figure(figsize = (8, 6))
@@ -192,7 +199,12 @@ def action_graphic_irrigation():
 
     show_head_module()
 
-    print(f'Mean Squared Error: {mse:.2f}')
+    print(f'Erro Quadrático Médio: {float_mse:.2f}')
+    print(f'Raiz do Erro Quadrático Médio: {float_rmse:.2f}')
+    print(f'Acurácia com Random Forest Regressor: {float_accuracy:.2f}')
+    print(f'Média do Erro Absoluto: {float_mae:.2f}')
+    print(f'Erro Percentual Médio Absoluto: {float_mape:.2f}')
+    print(f'Coeficiente de Determinação: {float_r2:.2f}')
 
     print('')
 
