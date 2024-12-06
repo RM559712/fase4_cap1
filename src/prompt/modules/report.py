@@ -169,10 +169,10 @@ def action_graphic_irrigation():
     object_dataframe['IRG_WEEK_DAY'] = object_dataframe['IRG_INI_DATE'].dt.dayofweek
     object_dataframe['IRG_WATER_LITER'] = object_dataframe['IRG_WATER'] / 1000
 
-    x = object_dataframe[['IRG_HOUR_INI', 'IRG_WEEK_DAY', 'IRG_DURATION', 'IRG_ORIGIN']]
-    y = object_dataframe['IRG_WATER_LITER']
+    list_x = object_dataframe[['IRG_HOUR_INI', 'IRG_WEEK_DAY', 'IRG_DURATION', 'IRG_ORIGIN']]
+    list_y = object_dataframe['IRG_WATER_LITER']
 
-    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 42)
+    X_train, X_test, y_train, y_test = train_test_split(list_x, list_y, test_size = 0.3, random_state = 42)
 
     object_random_forest_regressor = RandomForestRegressor()
     object_random_forest_regressor.fit(X_train, y_train)
@@ -189,7 +189,7 @@ def action_graphic_irrigation():
     # Gráfico de dispersão
     Pyplot.figure(figsize = (8, 6))
     Seaborn.scatterplot(x = y_test, y = y_pred)
-    Pyplot.plot([y.min(), y.max()], [y.min(), y.max()], '--r', label = 'Ideal')
+    Pyplot.plot([list_y.min(), list_y.max()], [list_y.min(), list_y.max()], '--r', label = 'Ideal')
     Pyplot.xlabel('Valores reais (em litros)')
     Pyplot.ylabel('Valores previstos (em litros)')
     Pyplot.title(f'Valores reais x Valores previstos - {dict_data_plantation['PLN_NAME']}')
@@ -199,6 +199,7 @@ def action_graphic_irrigation():
 
     show_head_module()
 
+    # Métricas
     print(f'Erro Quadrático Médio: {float_mse:.2f}')
     print(f'Raiz do Erro Quadrático Médio: {float_rmse:.2f}')
     print(f'Acurácia com Random Forest Regressor: {float_accuracy:.2f}')
