@@ -13,7 +13,7 @@ DHT dht(pinoDHT, modelo);
 #define pinLED 22
 
 // Definições do PIR
-#define pinPIR 34
+#define pinPIR 32
 #define pinLED1 23
 
 // Definições do LDR
@@ -29,7 +29,7 @@ DHT dht(pinoDHT, modelo);
 
 // Definições do Relé
 #define relePin 15  // Pino 15 do ESP32 conectado ao Relé
-#define pinLED2 21  // Pino GPIO conectado ao LED2
+#define pinLED2 17  // Pino GPIO conectado ao LED2
 
 // Variáveis de Controle
 bool fosfatoAtivado = false;  // Estado do sensor de Fosfato
@@ -52,6 +52,8 @@ void setup() {
     pinMode(echoPin, INPUT);
     pinMode(pinPIR, INPUT);
     pinMode(pinLED, OUTPUT);
+    pinMode(pinLED1, OUTPUT);
+    pinMode(pinLED2, OUTPUT);
     pinMode(ldrPin, INPUT);
     pinMode(relePin, OUTPUT);
 
