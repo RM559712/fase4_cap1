@@ -164,11 +164,11 @@ class F4C1Irrigation(Database):
 
             irg_water = dict_params['irg_water'] if 'irg_water' in dict_params and Helper.is_float(dict_params['irg_water']) == True else 0.00
 
-            dict_active_irrigation['IRG_WATER'] = irg_water
-            dict_active_irrigation['IRG_END_DATE'] = f"TO_TIMESTAMP('{Helper.get_current_datetime_to_oracle()}', 'DD/MM/YYYY HH24:MI:SS.FF6')"
-            dict_active_irrigation['IRG_STATUS_EXECUTION'] = self.STATUS_EXECUTION_FINISHED
+            dict_active_irrigation['dict_data']['IRG_WATER'] = irg_water
+            dict_active_irrigation['dict_data']['IRG_END_DATE'] = f"TO_TIMESTAMP('{Helper.get_current_datetime_to_oracle()}', 'DD/MM/YYYY HH24:MI:SS.FF6')"
+            dict_active_irrigation['dict_data']['IRG_STATUS_EXECUTION'] = self.STATUS_EXECUTION_FINISHED
 
-            self.update(dict_active_irrigation)
+            self.update(dict_active_irrigation['dict_data'])
 
         except Exception as error:
 
